@@ -1,0 +1,55 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /loaferCore
+spring:
+  profiles:
+    active: local
+  application:
+    name: loafer-core
+  # 支持 swagger3
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(hfn4MZOjQAXmk8ORvddR9/19zRlwNnskN2Slh9t+SYa9x6tN7aqogf3QOzPcFjyQdfU9Bq2saZOgzMgcUOeNwriV241NRQY0MMWI0bKcSuAsVwtmNvdAzymrprj+YNs4etQ8QM0RqL/1HH9IojGfJpld1Ol+Ayj5cJ9Y+z09rzBt3f4FV6bvQSV5wRGGO8CEx/Jd9+iEte+zsSR9lymeeA==)
+    username: ENC(j5IQ8VkZLlXcE7ZxWKw0gw==)
+    password: ENC(ctwaALSsNpCj+EOmXHnK7A==)
+  redis:
+    host: localhost
+    password: ENC(ctwaALSsNpCj+EOmXHnK7A==)
+    connect-timeout: 5000
+  cloud:
+    nacos:
+      server-addr: ENC(abjgu1AHRDlC4ryzl65Lqe6BB96bObT9)
+      username: ENC(rV28uQj1I/sRmPzPH0FRDQ==)
+      password: ENC(rV28uQj1I/sRmPzPH0FRDQ==)
+  servlet:
+    multipart:
+      max-file-size: 1GB # 单个文件大小为5MB
+      max-request-size: 5GB # 总上传的数据大小5MB
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: isDelete # 全局逻辑删除的实体字段名
+      logic-delete-value: 1 # 逻辑已删除值（默认为 1）
+      logic-not-delete-value: 0 # 逻辑未删除值（默认为 0）
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    password: LOAFER-CORE # 加密秘钥
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+#oss配置
+oss:
+  endpoint: https://oss-cn-hangzhou.aliyuncs.com
+  bucketName: loafer-bucket-001
+  accessKeyId: accessKeyId # 不是真实AccessKeyID，根据实际情况修改
+  secretAccessKey: secretAccessKey # 不是真实AccessKey，根据实际情况修改
+jwt:
+  ALLOW_INVALID_TOKEN_SEARCH_NUM: 2 # 无效的tokenId最多允许查询mysql的次数
+  INVALID_EXPIRE: 10 # 无效的tokenId在redis中的缓存时长，单位：分钟
