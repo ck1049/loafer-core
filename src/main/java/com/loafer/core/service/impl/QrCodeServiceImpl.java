@@ -37,9 +37,9 @@ public class QrCodeServiceImpl implements IQrCodeService {
         try {
             logInputStream = iOssService.getObjectContent(ossProperties.getBucketName(), logObjectName);
             BufferedImage logImage = ImageIO.read(logInputStream);
-            dto.setImg(logImage);
             QrConfig config = new QrConfig();
             modelMapper.map(dto, config);
+            config.setImg(logImage);
             return QrCodeUtil.generatePng(dto.getContent(), config);
         } catch (IOException e) {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "二维码生成失败！");

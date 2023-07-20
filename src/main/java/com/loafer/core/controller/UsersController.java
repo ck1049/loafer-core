@@ -39,7 +39,7 @@ public class UsersController {
     @ApiOperation(value = "用户登录")
     @PostMapping("login")
     public ResponseEntity<Boolean> login(@Valid @RequestBody @ApiParam UserLoginDto dto) {
-        service.login(dto.getUserName(), dto.getPassword());
+        service.login(dto.getUsername(), dto.getPassword());
         return ResponseEntity.ok(true);
     }
 
@@ -72,7 +72,7 @@ public class UsersController {
     public ResponseEntity<Boolean> delete(@Valid @RequestBody @ApiParam UserLoginDto dto, HttpServletRequest request) {
         String tokenId = request.getHeader("tokenId");
         Assert.state(StringUtils.isNotBlank(tokenId), "请求头缺少tokenId！");
-        service.delete(dto.getUserName(), dto.getPassword(), tokenId);
+        service.delete(dto.getUsername(), dto.getPassword(), tokenId);
         return ResponseEntity.ok(true);
     }
 

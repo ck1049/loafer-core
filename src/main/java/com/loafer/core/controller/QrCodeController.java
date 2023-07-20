@@ -30,8 +30,8 @@ public class QrCodeController {
     public ResponseEntity<Boolean> generate(@Valid @RequestBody QrConfigDto dto, HttpServletResponse response) throws IOException {
         byte[] bytes = service.generatePng(dto);
         response.getOutputStream().write(bytes);
-        BufferedImage image = ImageIO.read(new ByteArrayInputStream(bytes));
-        ImageIO.write(image, "png", new File("C:\\Users\\18238\\Desktop\\1.png"));
+        /*BufferedImage image = ImageIO.read(new ByteArrayInputStream(bytes));
+        ImageIO.write(image, "png", new File("C:\\Users\\18238\\Desktop\\1.png"));*/
         return ResponseEntity.ok(Boolean.TRUE);
     }
 }

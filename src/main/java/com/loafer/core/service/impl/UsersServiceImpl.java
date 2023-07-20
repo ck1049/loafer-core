@@ -176,11 +176,11 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
     }
 
     @Override
-    public Boolean delete(String userName, String password, String tokenId) {
+    public Boolean delete(String username, String password, String tokenId) {
         // 判断用户是否登录
         UserInfo userInfo = getLoginUser(tokenId);
         LambdaQueryWrapper<Users> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Users::getUsername, userName)
+        wrapper.eq(Users::getUsername, username)
                 .eq(Users::getPassword, encodePassword(password));
         Users one = getOne(wrapper);
         Assert.state(one != null, "用户名或密码不正确！");

@@ -52,10 +52,10 @@ public interface IUsersService extends IService<Users> {
 
     /**
      * 删除账号
-     * @param userName
+     * @param username
      * @param password
      * @param tokenId
      * @return
      */
-    Boolean delete(String userName, String password, String tokenId);
+    Boolean delete(String username, String password, String tokenId);
 }
