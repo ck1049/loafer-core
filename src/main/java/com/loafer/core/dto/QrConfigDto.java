@@ -2,13 +2,17 @@ package com.loafer.core.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel("二维码配置")
 public class QrConfigDto {
 
@@ -28,4 +32,7 @@ public class QrConfigDto {
     private Integer margin = 2;
     private int ratio = 6;
 
+    public QrConfigDto(String content) {
+        this.content = content;
+    }
 }

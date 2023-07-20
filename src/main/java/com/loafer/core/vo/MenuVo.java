@@ -29,19 +29,18 @@ public class MenuVo {
 
         // 顶级菜单id0
         List<MenuVo> menuList = parentMap.get(0);
-        List<MenuVo> result = addChildren(menuList, parentMap);
+        addChildren(menuList, parentMap);
     }
 
-    public static List<MenuVo> addChildren(List<MenuVo> menuList, Map<Integer, List<MenuVo>> parentMap) {
-        List<MenuVo> result = new ArrayList<>();
-        for (MenuVo menuVo : menuList) {
-            List<MenuVo> list = parentMap.get(menuVo.getParentId());
-            if (CollectionUtils.isEmpty(list)) {
-                // 没有子菜单了
-                return new ArrayList<>();
-            }
-            result.addAll(addChildren(list, parentMap));
+    public static void addChildren(List<MenuVo> menuList, Map<Integer, List<MenuVo>> parentMap) {
+        if (CollectionUtils.isEmpty(menuList)) {
+            return;
         }
-        return result;
+        for (MenuVo menuVo : menuList) {
+            // menuVo的子菜单
+            List<MenuVo> menuVos = parentMap.get(menuVo.getId());
+            menuVo.setChildren(menuVos);
+            addChildren(menuVos, parentMap);
+        }
     }
 }

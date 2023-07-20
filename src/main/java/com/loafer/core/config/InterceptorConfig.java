@@ -21,7 +21,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
             "/webjars/**",
             "/v2/**",
             "/user/**", // 用户相关
-            "/error/**"
+            "/error/**",
+            "/qrCode/**"
     };
     @Resource(name = "loginInterceptor")
     private LoginInterceptor loginInterceptor;

@@ -4,6 +4,10 @@ import com.loafer.core.dto.QrConfigDto;
 import com.loafer.core.service.IQrCodeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,12 +30,15 @@ public class QrCodeController {
 
 
     @ApiOperation(value = "二维码生成")
-    @PostMapping("generate")
-    public ResponseEntity<Boolean> generate(@Valid @RequestBody QrConfigDto dto, HttpServletResponse response) throws IOException {
+    @GetMapping("generate")
+    public ResponseEntity<byte[]> generate(@Valid QrConfigDto dto, HttpServletResponse response) throws IOException {
         byte[] bytes = service.generatePng(dto);
-        response.getOutputStream().write(bytes);
+        response.getOutputStream().write(bytes);;
         /*BufferedImage image = ImageIO.read(new ByteArrayInputStream(bytes));
         ImageIO.write(image, "png", new File("C:\\Users\\18238\\Desktop\\1.png"));*/
-        return ResponseEntity.ok(Boolean.TRUE);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
     }
+
 }
